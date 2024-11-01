@@ -8,19 +8,22 @@
 </head>
 <body>
     <div class="container">
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
         <form id="multiStepForm">
             <div class="step">
                 <h2>Step 1: Shipper</h2>
                 <label for="shipperAddress">Address:</label>
-                <input type="text" id="shipperAddress" name="shipperAddress" required>
+                <input type="text" id="shipperAddress" name="shipperAddress" required minlength="10">
                 <label for="shipperPhone">Telephone Number:</label>
-                <input type="tel" id="shipperPhone" name="shipperPhone" required>
+                <input type="tel" id="shipperPhone" name="shipperPhone" required pattern="^\d{10}$">
                 <button type="button" class="nextBtn">Next</button>
             </div>
             <div class="step">
                 <h2>Step 2: Consignee</h2>
                 <label for="consigneeDODAAC">DODAAC:</label>
-                <input type="text" id="consigneeDODAAC" name="consigneeDODAAC" required>
+                <input type="text" id="consigneeDODAAC" name="consigneeDODAAC" required pattern="^[A-Z0-9]{6}$">
                 <label for="consigneeLocation">Geographical Location:</label>
                 <input type="text" id="consigneeLocation" name="consigneeLocation" required>
                 <label for="emergencyContact">Emergency Contact (for infectious substances):</label>
@@ -28,14 +31,7 @@
                 <button type="button" class="prevBtn">Previous</button>
                 <button type="button" class="nextBtn">Next</button>
             </div>
-            <div class="step">
-                <h2>Step 3: Air Waybill No.</h2>
-                <label for="airWaybillNo">Air Waybill No.:</label>
-                <input type="text" id="airWaybillNo" name="airWaybillNo">
-                <button type="button" class="prevBtn">Previous</button>
-                <button type="button" class="nextBtn">Next</button>
-            </div>
-            <!-- Repeat similar blocks for steps 4 to 22 -->
+            <!-- Repeat similar blocks for steps 3 to 22 -->
             <div class="step">
                 <h2>Step 22: Signature</h2>
                 <label for="signature">Signature:</label>
