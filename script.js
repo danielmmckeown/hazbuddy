@@ -9,10 +9,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function validateStep(stepIndex) {
+        const inputs = steps[stepIndex].querySelectorAll('input');
+        let valid = true;
+        inputs.forEach(input => {
+            if (!input.checkValidity()) {
+                input.classList.add('invalid');
+                valid = false;
+            } else {
+                input.classList.remove('invalid');
+            }
+        });
+        return valid;
+    }
+
     function nextStep() {
-        if (currentStep < steps.length - 1) {
-            currentStep++;
-            showStep(currentStep);
+        if (validateStep(currentStep)) {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
         }
     }
 
@@ -32,9 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        alert('Form submitted!');
-        // Add form submission logic here
+        if (!validateStep(currentStep)) {
+            event.preventDefault();
+        } else {
+            alert('Form submitted!');
+            // Add form submission logic here
+        }
     });
 
     // Initialize the form by showing the first step
