@@ -16,6 +16,21 @@ body {
     width: 300px;
 }
 
+.progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 10px;
+    background-color: #007bff;
+    width: 0;
+    transition: width 0.3s;
+}
+
 .step {
     display: none;
 }
