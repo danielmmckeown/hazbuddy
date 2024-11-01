@@ -1,19 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('multiStepForm');
     const steps = Array.from(form.querySelectorAll('.step'));
-    const progressBarFill = document.getElementById('progressBarFill');
     let currentStep = 0;
 
     function showStep(stepIndex) {
         steps.forEach((step, index) => {
             step.classList.toggle('active', index === stepIndex);
         });
-        updateProgressBar(stepIndex);
-    }
-
-    function updateProgressBar(stepIndex) {
-        const progress = ((stepIndex + 1) / steps.length) * 100;
-        progressBarFill.style.width = `${progress}%`;
     }
 
     function validateInput(input) {
