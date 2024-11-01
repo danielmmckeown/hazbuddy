@@ -1,25 +1,50 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('multiStepForm');
     const steps = Array.from(form.querySelectorAll('.step'));
+    const progressBarFill = document.getElementById('progressBarFill');
     let currentStep = 0;
 
     function showStep(stepIndex) {
         steps.forEach((step, index) => {
             step.classList.toggle('active', index === stepIndex);
         });
+        updateProgressBar(stepIndex);
+    }
+
+    function updateProgressBar(stepIndex) {
+        const progress = ((stepIndex + 1) / steps.length) * 100;
+        progressBarFill.style.width = `${progress}%`;
+    }
+
+    function validateInput(input) {
+        if (!input.checkValidity()) {
+            input.classList.add('invalid');
+        } else {
+            input.classList.remove('invalid');
+        }
     }
 
     function validateStep(stepIndex) {
         const inputs = steps[stepIndex].querySelectorAll('input');
         let valid = true;
         inputs.forEach(input => {
+            validateInput(input);
             if (!input.checkValidity()) {
-                input.classList.add('invalid');
                 valid = false;
-            } else {
-                input.classList.remove('invalid');
             }
         });
+
+        // Custom validation logic
+        if (stepIndex === 1) { // Example for Step 2
+            const consigneeDODAAC = document.getElementById('consigneeDODAAC').value;
+            if (!/^[A-Z0-9]{6}$/.test(consigneeDODAAC)) {
+                document.getElementById('consigneeDODAAC').classList.add('invalid');
+                valid = false;
+            } else {
+                document.getElementById('consigneeDODAAC').classList.remove('invalid');
+            }
+        }
+
         return valid;
     }
 
@@ -53,6 +78,13 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             alert('Form submitted!');
             // Add form submission logic here
+        }
+    });
+
+    // Add real-time validation
+    form.addEventListener('input', function (event) {
+        if (event.target.tagName.toLowerCase() === 'input') {
+            validateInput(event.target);
         }
     });
 
