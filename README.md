@@ -50,3 +50,29 @@ JavaScript
     The rest of the JavaScript handles form validation, navigation, and real-time input validation as before.
 
 By adding a progress bar, you provide a visual indicator of the user's progress through the form, enhancing the user experience.
+
+## Explanation - Real Time Validation
+
+validateInput Function
+
+: This function checks the validity of a single input field and adds or removes the invalid
+
+class based on the validity.
+validateStep Function
+
+: This function validates all input fields in the current step by calling validateInput
+
+for each input. It also includes custom validation logic for specific steps.
+nextStep and prevStep Functions
+
+: These functions handle navigation between steps, ensuring that validation is performed before moving to the next step.
+Form Submission
+
+: The form submission event listener ensures that the inputs in the current step are valid before submitting the form.
+Real-time Validation
+
+: The input
+
+event listener is added to the form to validate input fields in real-time as the user types. This listener calls validateInput
+
+for the target input field whenever the input event is triggered.
