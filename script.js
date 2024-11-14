@@ -9,10 +9,44 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function validateInput(input) {
+        if (!input.checkValidity()) {
+            input.classList.add('invalid');
+        } else {
+            input.classList.remove('invalid');
+        }
+    }
+
+    function validateStep(stepIndex) {
+        const inputs = steps[stepIndex].querySelectorAll('input');
+        let valid = true;
+        inputs.forEach(input => {
+            validateInput(input);
+            if (!input.checkValidity()) {
+                valid = false;
+            }
+        });
+
+        // Custom validation logic
+        if (stepIndex === 1) { // Example for Step 2
+            const consigneeDODAAC = document.getElementById('consigneeDODAAC').value;
+            if (!/^[A-Z0-9]{6}$/.test(consigneeDODAAC)) {
+                document.getElementById('consigneeDODAAC').classList.add('invalid');
+                valid = false;
+            } else {
+                document.getElementById('consigneeDODAAC').classList.remove('invalid');
+            }
+        }
+
+        return valid;
+    }
+
     function nextStep() {
-        if (currentStep < steps.length - 1) {
-            currentStep++;
-            showStep(currentStep);
+        if (validateStep(currentStep)) {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
         }
     }
 
@@ -32,9 +66,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        alert('Form submitted!');
-        // Add form submission logic here
+        if (!validateStep(currentStep)) {
+            event.preventDefault();
+        } else {
+            alert('Form submitted!');
+            // Add form submission logic here
+        }
+    });
+
+    // Add real-time validation
+    form.addEventListener('input', function (event) {
+        if (event.target.tagName.toLowerCase() === 'input') {
+            validateInput(event.target);
+        }
     });
 
     // Initialize the form by showing the first step
