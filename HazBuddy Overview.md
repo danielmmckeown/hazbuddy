@@ -4,7 +4,7 @@ During mobility movements, hazardous cargo must be accompanied by a Shippers Dec
 ## Solution
 HazBuddy is a web application that walks Increment Monitors through completing a Shipper's Declaration of Dangerous Goods (SDDG). HazBuddy allows users to prepare and file a SDDG online, using a step-by-step interview process that guides them through the SDDG preparation and certification process.
 
-HazBuddy offers a range of features and tools to help users prepare their DSDD accurately and efficiently, including:
+HazBuddy offers a range of features and tools to help users prepare their SDDG accurately and efficiently, including:
 
 **User Authentication:** Users must create an account and log in to access the software.
 **Data Collection:** Users input their hazardous material information, including TK.
