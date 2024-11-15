@@ -1,69 +1,81 @@
+/* Set the font family, background color, and layout for the entire page */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    font-family: Arial, sans-serif; /* Use Arial as the primary font */
+    background-color: #f4f4f4; /* Set the background color to a light gray */
+    display: flex; /* Use flexbox to center the content */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 100vh; /* Set the height to the full viewport height */
+    margin: 0; /* Remove any margins */
 }
 
+/* Style the container element */
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    background-color: #fff; /* Set the background color to white */
+    padding: 20px; /* Add some padding to the container */
+    border-radius: 5px; /* Add a slight border radius to the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow to the container */
+    width: 300px; /* Set the width of the container to 300 pixels */
 }
 
+/* Style the progress bar */
 .progress-bar {
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    overflow: hidden;
+    width: 100%; /* Make the progress bar full width */
+    background-color: #e0e0e0; /* Set the background color to a light gray */
+    border-radius: 5px; /* Add a slight border radius to the progress bar */
+    margin-bottom: 20px; /* Add some margin to the bottom of the progress bar */
+    overflow: hidden; /* Hide any overflowing content */
 }
 
+/* Style the progress bar fill */
 .progress-bar-fill {
-    height: 10px;
-    background-color: #007bff;
-    width: 0;
-    transition: width 0.3s;
+    height: 10px; /* Set the height of the progress bar fill to 10 pixels */
+    background-color: #007bff; /* Set the background color to a blue */
+    width: 0; /* Initialize the width to 0 */
+    transition: width 0.3s; /* Add a transition effect to the width */
 }
 
+/* Style the step elements */
 .step {
-    display: none;
+    display: none; /* Hide all step elements by default */
 }
 
+/* Style the active step element */
 .step.active {
-    display: block;
+    display: block; /* Show the active step element */
 }
 
+/* Style the buttons */
 button {
-    margin-top: 10px;
+    margin-top: 10px; /* Add some margin to the top of the buttons */
 }
 
+/* Style the next and previous buttons */
 button.nextBtn, button.prevBtn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
+    background-color: #007bff; /* Set the background color to a blue */
+    color: #fff; /* Set the text color to white */
+    border: none; /* Remove any borders */
+    padding: 10px 20px; /* Add some padding to the buttons */
+    cursor: pointer; /* Change the cursor to a pointer */
+    border-radius: 5px; /* Add a slight border radius to the buttons */
 }
 
+/* Style the hover effect for the next and previous buttons */
 button.nextBtn:hover, button.prevBtn:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Change the background color on hover */
 }
 
+/* Style the submit button */
 button[type="submit"] {
-    background-color: #28a745;
+    background-color: #28a745; /* Set the background color to a green */
 }
 
+/* Style the hover effect for the submit button */
 button[type="submit"]:hover {
-    background-color: #218838;
+    background-color: #218838; /* Change the background color on hover */
 }
 
+/* Style the invalid input fields */
 .invalid {
-    border-color: red;
+    border-color: red; /* Change the border color to red */
 }
