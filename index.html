@@ -1,94 +1,446 @@
-<!-- Define the document type and character encoding -->
-<!DOCTYPE html>
-<!-- Set the language of the document to English -->
-<html lang="en">
-  <!-- The head section contains metadata about the document -->
-  <head>
-    <!-- Set the character encoding of the document to UTF-8 -->
-    <meta charset="UTF-8">
-    <!-- Set the viewport settings for responsive design -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Set the title of the page, which appears in the browser's title bar -->
-    <title>HazBuddy</title>
-    <!-- Link to an external stylesheet, which defines the visual styling of the page -->
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <!-- The body section contains the content of the HTML document -->
-  <body>
-    <!-- A container element to wrap the entire form -->
-    <div class="container">
-      <!-- A progress bar to track the user's progress through the form -->
-      <div class="progress-bar">
-        <!-- The fill element of the progress bar, which will be updated dynamically -->
-        <div class="progress-bar-fill" id="progressBarFill"></div>
-      </div>
-      <!-- The multi-step form, which is divided into several sections -->
-      <form id="multiStepForm">
-        <!-- Step 1: Shipper information -->
-        <div class="step">
-          <!-- A heading to identify the current step -->
-          <h2>Step 1: Shipper</h2>
-          <!-- A label and input field for the shipper's address -->
-          <label for="shipperAddress">Address:</label>
-          <input type="text" id="shipperAddress" name="shipperAddress" required minlength="10">
-          <!-- A label and input field for the shipper's phone number -->
-          <label for="shipperPhone">Telephone Number:</label>
-          <input type="tel" id="shipperPhone" name="shipperPhone" required pattern="^\d{10}$">
-          <!-- A button to proceed to the next step -->
-          <button type="button" class="nextBtn">Next</button>
-        </div>
-        <!-- Step 2: Consignee information -->
-        <div class="step">
-          <!-- A heading to identify the current step -->
-          <h2>Step 2: Consignee</h2>
-          <!-- A label and input field for the consignee's DODAAC -->
-          <label for="consigneeDODAAC">DODAAC:</label>
-          <input type="text" id="consigneeDODAAC" name="consigneeDODAAC" required pattern="^[A-Z0-9]{6}$">
-          <!-- A label and input field for the consignee's geographical location -->
-          <label for="consigneeLocation">Geographical Location:</label>
-          <input type="text" id="consigneeLocation" name="consigneeLocation" required>
-          <!-- A label and input field for the emergency contact (optional) -->
-          <label for="emergencyContact">Emergency Contact (for infectious substances):</label>
-          <input type="text" id="emergencyContact" name="emergencyContact">
-          <!-- Buttons to navigate between steps -->
-          <button type="button" class="prevBtn">Previous</button>
-          <button type="button" class="nextBtn">Next</button>
-        </div>
-        <!-- Repeat similar blocks for steps 3 to 7 -->
-        <!-- ... -->
-        <!-- Step 8: Airport of Departure -->
-        <div class="step" id="step8">
-          <!-- A heading to identify the current step -->
-          <h2>Step 8: Airport of Departure</h2>
-          <!-- A label and input field for the Port of Embarkation (POE) -->
-          <label for="poe">Enter the three-digit Port of Embarkation (POE):</label>
-          <input type="text" id="poe" name="poe" pattern="^[A-Z]{3}$" required>
-          <!-- A hint to explain the format of the POE code -->
-          <small>This is the IATA Aiport Code and must be exactly 3 letters.</small>
-          <!-- A label and input field for the geographical location of the airport (optional) -->
-          <label for="geoLocation">Enter the in-the-clear geographical location of the airport of departure (optional):</label>
-          <input type="text" id="geoLocation" name="geoLocation">
-          <!-- Buttons to navigate between steps -->
-          <button type="button" class="prevBtn">Previous</button>
-          <button type="button" class="nextBtn">Next</button>
-        </div>
-        <!-- Repeat similar blocks for steps 9 to 22 -->
-        <!-- ... -->
-        <!-- Step 22: Signature -->
-        <div class="step">
-          <!-- A heading to identify the current step -->
-          <h2>Step 22: Signature</h2>
-          <!-- A label and input field for the signature -->
-          <label for="signature">Signature:</label>
-          <input type="text" id="signature" name="signature" required>
-          <!-- A button to navigate to the previous step -->
-          <button type="button" class="prevBtn">Previous</button>
-          <!-- A button to submit the form -->
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+<!DOCTYPE html> <!-- Define the document type and character encoding -->
+<html lang="en"> <!-- Set the language of the document to English -->
+
+<!-- The head section contains metadata about the document -->
+
+<head>
+  <!-- Set the character encoding of the document to UTF-8 -->
+  <meta charset="UTF-8">
+  <!-- Set the viewport settings for responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Set the title of the page, which appears in the browser's title bar -->
+  <title>HazBuddy</title>
+  <!-- Link to an external stylesheet, which defines the visual styling of the page -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- A container element to wrap the entire form -->
+  <div class="container">
+    <!-- A progress bar to track the user's progress through the form -->
+    <div class="progress-bar">
+      <!-- The fill element of the progress bar, which will be updated dynamically -->
+      <div class="progress-bar-fill" id="progressBarFill"></div>
     </div>
-    <!-- A script tag to link to an external JavaScript file, which will contain the form's logic -->
-    <script src="script.js"></script>
-  </body>
+    <!-- The multi-step form, which is divided into several sections -->
+    <form id="multiStepForm">
+      <!-- Step 1: Prompt the user (shipper) for their mailing address -->
+      <!-- TODO If user selects USA for Country then prompt for Zip Code; otherwise prompt for Postal Code -->
+      <div class="step" id="step1">
+        <h2>Please Enter Your Mailing Address</h2>
+        <!-- TODO Add 'required' attributes to all but Street2 -->
+        <p>
+          <label for="shipperAddressStreet1">Street 1:</label>
+          <input type="text" id="shipperAddressStreet1" name="shipperAddress">
+        </p>
+        <p>
+          <label for="shipperAddressStreet2">Street 2:</label>
+          <input type="text" id="shipperAddressStreet2" name="shipperAddressStreet2">
+        </p>
+        <p>
+          <label for="shipperAddressCountry">Country:</label>
+          <select name="shipperAddressCountry" id="shipperAddressCountry">
+            <option value="">Select a Country</option>
+            <option value="AF">Afghanistan</option>
+            <option value="AX">Åland Islands</option>
+            <option value="AL">Albania</option>
+            <option value="DZ">Algeria</option>
+            <option value="AS">American Samoa</option>
+            <option value="AD">Andorra</option>
+            <option value="AO">Angola</option>
+            <option value="AI">Anguilla</option>
+            <option value="AQ">Antarctica</option>
+            <option value="AG">Antigua and Barbuda</option>
+            <option value="AR">Argentina</option>
+            <option value="AM">Armenia</option>
+            <option value="AW">Aruba</option>
+            <option value="AU">Australia</option>
+            <option value="AT">Austria</option>
+            <option value="AZ">Azerbaijan</option>
+            <option value="BS">Bahamas</option>
+            <option value="BH">Bahrain</option>
+            <option value="BD">Bangladesh</option>
+            <option value="BB">Barbados</option>
+            <option value="BY">Belarus</option>
+            <option value="BE">Belgium</option>
+            <option value="BZ">Belize</option>
+            <option value="BJ">Benin</option>
+            <option value="BM">Bermuda</option>
+            <option value="BT">Bhutan</option>
+            <option value="BO">Bolivia</option>
+            <option value="BA">Bosnia and Herzegovina</option>
+            <option value="BW">Botswana</option>
+            <option value="BV">Bouvet Island</option>
+            <option value="BR">Brazil</option>
+            <option value="VG">British Virgin Islands</option>
+            <option value="IO">British Indian Ocean Territory</option>
+            <option value="BN">Brunei Darussalam</option>
+            <option value="BG">Bulgaria</option>
+            <option value="BF">Burkina Faso</option>
+            <option value="BI">Burundi</option>
+            <option value="KH">Cambodia</option>
+            <option value="CM">Cameroon</option>
+            <option value="CA">Canada</option>
+            <option value="CV">Cape Verde</option>
+            <option value="KY">Cayman Islands</option>
+            <option value="CF">Central African Republic</option>
+            <option value="TD">Chad</option>
+            <option value="CL">Chile</option>
+            <option value="CN">China</option>
+            <option value="CX">Christmas Island</option>
+            <option value="CC">Cocos (Keeling) Islands</option>
+            <option value="CO">Colombia</option>
+            <option value="KM">Comoros</option>
+            <option value="CG">Congo</option>
+            <option value="CD">Congo, the Democratic Republic of the</option>
+            <option value="CK">Cook Islands</option>
+            <option value="CR">Costa Rica</option>
+            <option value="CI">Côte d'Ivoire</option>
+            <option value="HR">Croatia</option>
+            <option value="CU">Cuba</option>
+            <option value="CY">Cyprus</option>
+            <option value="CZ">Czech Republic</option>
+            <option value="DK">Denmark</option>
+            <option value="DJ">Djibouti</option>
+            <option value="DM">Dominica</option>
+            <option value="DO">Dominican Republic</option>
+            <option value="EC">Ecuador</option>
+            <option value="EG">Egypt</option>
+            <option value="SV">El Salvador</option>
+            <option value="GQ">Equatorial Guinea</option>
+            <option value="ER">Eritrea</option>
+            <option value="EE">Estonia</option>
+            <option value="ET">Ethiopia</option>
+            <option value="FK">Falkland Islands (Malvinas)</option>
+            <option value="FO">Faroe Islands</option>
+            <option value="FJ">Fiji</option>
+            <option value="FI">Finland</option>
+            <option value="FR">France</option>
+            <option value="GF">French Guiana</option>
+            <option value="PF">French Polynesia</option>
+            <option value="TF">French Southern Territories</option>
+            <option value="GA">Gabon</option>
+            <option value="GM">Gambia</option>
+            <option value="GE">Georgia</option>
+            <option value="DE">Germany</option>
+            <option value="GH">Ghana</option>
+            <option value="GI">Gibraltar</option>
+            <option value="GR">Greece</option>
+            <option value="GL">Greenland</option>
+            <option value="GD">Grenada</option>
+            <option value="GP">Guadeloupe</option>
+            <option value="GU">Guam</option>
+            <option value="GT">Guatemala</option>
+            <option value="GN">Guinea</option>
+            <option value="GW">Guinea-Bissau</option>
+            <option value="GY">Guyana</option>
+            <option value="HT">Haiti</option>
+            <option value="HM">Heard Island and McDonald Islands</option>
+            <option value="VA">Holy See (Vatican City State)</option>
+            <option value="HN">Honduras</option>
+            <option value="HK">Hong Kong</option>
+            <option value="HU">Hungary</option>
+            <option value="IS">Iceland</option>
+            <option value="IN">India</option>
+            <option value="ID">Indonesia</option>
+            <option value="IR">Iran, Islamic Republic of</option>
+            <option value="IQ">Iraq</option>
+            <option value="IE">Ireland</option>
+            <option value="IL">Israel</option>
+            <option value="IT">Italy</option>
+            <option value="JM">Jamaica</option>
+            <option value="JP">Japan</option>
+            <option value="JO">Jordan</option>
+            <option value="KZ">Kazakhstan</option>
+            <option value="KE">Kenya</option>
+            <option value="KI">Kiribati</option>
+            <option value="KP">Korea, Democratic People's Republic of</option>
+            <option value="KR">Korea, Republic of</option>
+            <option value="KW">Kuwait</option>
+            <option value="KG">Kyrgyzstan</option>
+            <option value="LA">Lao People's Democratic Republic</option>
+            <option value="LV">Latvia</option>
+            <option value="LB">Lebanon</option>
+            <option value="LS">Lesotho</option>
+            <option value="LR">Liberia</option>
+            <option value="LY">Libyan Arab Jamahiriya</option>
+            <option value="LI">Liechtenstein</option>
+            <option value="LT">Lithuania</option>
+            <option value="LU">Luxembourg</option>
+            <option value="MO">Macao</option>
+            <option value="MK">Macedonia, the former Yugoslav Republic of</option>
+            <option value="MG">Madagascar</option>
+            <option value="MW">Malawi</option>
+            <option value="MY">Malaysia</option>
+            <option value="MV">Maldives</option>
+            <option value="ML">Mali</option>
+            <option value="MT">Malta</option>
+            <option value="MH">Marshall Islands</option>
+            <option value="MQ">Martinique</option>
+            <option value="MR">Mauritania</option>
+            <option value="MU">Mauritius</option>
+            <option value="YT">Mayotte</option>
+            <option value="MX">Mexico</option>
+            <option value="FM">Micronesia, Federated States of</option>
+            <option value="MD">Moldova, Republic of</option>
+            <option value="MC">Monaco</option>
+            <option value="MN">Mongolia</option>
+            <option value="MS">Montserrat</option>
+            <option value="MA">Morocco</option>
+            <option value="MZ">Mozambique</option>
+            <option value="MM">Myanmar</option>
+            <option value="NA">Namibia</option>
+            <option value="NR">Nauru</option>
+            <option value="NP">Nepal</option>
+            <option value="NL">Netherlands</option>
+            <option value="AN">Netherlands Antilles</option>
+            <option value="NC">New Caledonia</option>
+            <option value="NZ">New Zealand</option>
+            <option value="NI">Nicaragua</option>
+            <option value="NE">Niger</option>
+            <option value="NG">Nigeria</option>
+            <option value="NU">Niue</option>
+            <option value="NF">Norfolk Island</option>
+            <option value="MP">Northern Mariana Islands</option>
+            <option value="NO">Norway</option>
+            <option value="OM">Oman</option>
+            <option value="PK">Pakistan</option>
+            <option value="PW">Palau</option>
+            <option value="PS">Palestinian Territory, Occupied</option>
+            <option value="PA">Panama</option>
+            <option value="PG">Papua New Guinea</option>
+            <option value="PY">Paraguay</option>
+            <option value="PE">Peru</option>
+            <option value="PH">Philippines</option>
+            <option value="PN">Pitcairn</option>
+            <option value="PL">Poland</option>
+            <option value="PT">Portugal</option>
+            <option value="PR">Puerto Rico</option>
+            <option value="QA">Qatar</option>
+            <option value="RE">Réunion</option>
+            <option value="RO">Romania</option>
+            <option value="RU">Russia</option>
+            <option value="RW">Rwanda</option>
+            <option value="SA">Saint Helena, Ascension and Tristan da Cunha</option>
+            <option value="KN">Saint Kitts and Nevis</option>
+            <option value="LC">Saint Lucia</option>
+            <option value="PM">Saint Pierre and Miquelon</option>
+            <option value="VC">Saint Vincent and the Grenadines</option>
+            <option value="WS">Samoa</option>
+            <option value="SM">San Marino</option>
+            <option value="ST">Sao Tome and Principe</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="SN">Senegal</option>
+            <option value="CS">Serbia and Montenegro</option>
+            <option value="SC">Seychelles</option>
+            <option value="SL">Sierra Leone</option>
+            <option value="SG">Singapore</option>
+            <option value="SK">Slovakia</option>
+            <option value="SI">Slovenia</option>
+            <option value="SB">Solomon Islands</option>
+            <option value="SO">Somalia</option>
+            <option value="ZA">South Africa</option>
+            <option value="GS">South Georgia and the South Sandwich Islands</option>
+            <option value="ES">Spain</option>
+            <option value="LK">Sri Lanka</option>
+            <option value="SD">Sudan</option>
+            <option value="SR">Suriname</option>
+            <option value="SJ">Svalbard and Jan Mayen</option>
+            <option value="SZ">Swaziland</option>
+            <option value="SE">Sweden</option>
+            <option value="CH">Switzerland</option>
+            <option value="SY">Syrian Arab Republic</option>
+            <option value="TW">Taiwan, Province of China</option>
+            <option value="TJ">Tajikistan</option>
+            <option value="TZ">Tanzania, United Republic of</option>
+            <option value="TH">Thailand</option>
+            <option value="TL">Timor-Leste</option>
+            <option value="TG">Togo</option>
+            <option value="TK">Tokelau</option>
+            <option value="TO">Tonga</option>
+            <option value="TT">Trinidad and Tobago</option>
+            <option value="TN">Tunisia</option>
+            <option value="TR">Turkey</option>
+            <option value="TM">Turkmenistan</option>
+            <option value="TC">Turks and Caicos Islands</option>
+            <option value="TV">Tuvalu</option>
+            <option value="UG">Uganda</option>
+            <option value="UA">Ukraine</option>
+            <option value="AE">United Arab Emirates</option>
+            <option value="GB">United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="UM">United States Minor Outlying Islands</option>
+            <option value="UY">Uruguay</option>
+            <option value="UZ">Uzbekistan</option>
+            <option value="VU">Vanuatu</option>
+            <option value="VE">Venezuela</option>
+            <option value="VN">Viet Nam</option>
+            <option value="VI">Virgin Islands, U.S.</option>
+            <option value="WF">Wallis and Futuna</option>
+            <option value="EH">Western Sahara</option>
+            <option value="YE">Yemen</option>
+            <option value="ZM">Zambia</option>
+            <option value="ZW">Zimbabwe</option>
+          </select>
+        </p>
+        <label for="shipperAddressCity">City:</label>
+        <input type="text" id="shipperAddressCity" name="shipperAddressCity">
+        </p>
+        <p>
+          <label for="shipperAddressState">State:</label>
+          <select name="shipperAddressState" id="shipperAddressState">
+            <option value="">Select a State or Territory</option>
+            <!-- States -->
+            <option value="AL">Alabama - AL</option>
+            <option value="AK">Alaska - AK</option>
+            <option value="AZ">Arizona - AZ</option>
+            <option value="AR">Arkansas - AR</option>
+            <option value="CA">California - CA</option>
+            <option value="CO">Colorado - CO</option>
+            <option value="CT">Connecticut - CT</option>
+            <option value="DE">Delaware - DE</option>
+            <option value="FL">Florida - FL</option>
+            <option value="GA">Georgia - GA</option>
+            <option value="HI">Hawaii - HI</option>
+            <option value="ID">Idaho - ID</option>
+            <option value="IL">Illinois - IL</option>
+            <option value="IN">Indiana - IN</option>
+            <option value="IA">Iowa - IA</option>
+            <option value="KS">Kansas - KS</option>
+            <option value="KY">Kentucky - KY</option>
+            <option value="LA">Louisiana - LA</option>
+            <option value="ME">Maine - ME</option>
+            <option value="MD">Maryland - MD</option>
+            <option value="MA">Massachusetts - MA</option>
+            <option value="MI">Michigan - MI</option>
+            <option value="MN">Minnesota - MN</option>
+            <option value="MS">Mississippi - MS</option>
+            <option value="MO">Missouri - MO</option>
+            <option value="MT">Montana - MT</option>
+            <option value="NE">Nebraska - NE</option>
+            <option value="NV">Nevada - NV</option>
+            <option value="NH">New Hampshire - NH</option>
+            <option value="NJ">New Jersey - NJ</option>
+            <option value="NM">New Mexico - NM</option>
+            <option value="NY">New York - NY</option>
+            <option value="NC">North Carolina - NC</option>
+            <option value="ND">North Dakota - ND</option>
+            <option value="OH">Ohio - OH</option>
+            <option value="OK">Oklahoma - OK</option>
+            <option value="OR">Oregon - OR</option>
+            <option value="PA">Pennsylvania - PA</option>
+            <option value="RI">Rhode Island - RI</option>
+            <option value="SC">South Carolina - SC</option>
+            <option value="SD">South Dakota - SD</option>
+            <option value="TN">Tennessee - TN</option>
+            <option value="TX">Texas - TX</option>
+            <option value="UT">Utah - UT</option>
+            <option value="VT">Vermont - VT</option>
+            <option value="VA">Virginia - VA</option>
+            <option value="WA">Washington - WA</option>
+            <option value="WV">West Virginia - WV</option>
+            <option value="WI">Wisconsin - WI</option>
+            <option value="WY">Wyoming - WY</option>
+            <!-- Territories -->
+            <option value="AS">American Samoa - AS</option>
+            <option value="DC">Washington, D.C. - DC</option>
+            <option value="GU">Guam - GU</option>
+            <option value="MP">Northern Mariana Islands - MP</option>
+            <option value="PR">Puerto Rico - PR</option>
+            <option value="UM">United States Minor Outlying Islands - UM</option>
+            <option value="VI">United States Virgin Islands - VI</option>
+            <!-- Military Addresses -->
+            <option value="AA">Armed Forces Americas - AA</option>
+            <option value="AE">Armed Forces Europe - AE</option>
+            <option value="AP">Armed Forces Pacific - AP</option>
+          </select>
+        <p>
+          <label for="shipperAddressZipCode">Zip Code:</label>
+          <input type="text" id="shipperAddressZipCode" name="shipperAddressZipCode">
+        </p>
+        <!-- TODO Uncomment for 'required' <input type="text" id="shipperAddressZipCode" name="shipperAddressZipCode" required pattern="^\d{5}$"><br> -->
+        <!-- <label for="shipperAddressPostalCode">Postal Code:</label>
+        <input type="text" id="shipperAddressPostalCode" name="shipperAddressPostalCode" required><br> -->
+        <!-- A button to proceed to the next step -->
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+      <div class="step" id="step2">
+        <!-- Step 2: Prompt the user (shipper) for their phone numbers -->
+        <h2>Please Enter A Telephone Number(s)</h2>
+        <p>
+          <label for="shipperPhoneDSN">DSN:</label>
+          <input type="tel" id="shipperPhoneDSN" name="shipperPhoneDSN" placeholder="(XXX) XXX-XXXX"><br>
+          <!-- TODO Uncomment for 'required' <input type="tel" id="shipperPhone" name="shipperPhoneDSN" required pattern="^\d{10}$"><br> -->
+        </p>
+        <p>
+          <label for="shipperPhoneComm">Commercial:</label>
+          <input type="tel" id="shipperPhoneComm" name="shipperPhoneComm"><br>
+        </p>
+        <button type="button" class="prevBtn">Previous</button>
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+      <div class="step" id="step3">
+        <!-- Step 3: Prompt the user (shipper) for the consignee's DODAAC -->
+        <h2>Please Enter The Consignee's DODAAC</h2>
+        <p>
+          <label for="consigneeDODAAC">Consignee DODAAC:</label>
+          <input type="text" id="consigneeDODAAC" name="consigneeDODAAC" required pattern="^[A-Z0-9]{6}$">
+        <blockquote>The Consignee is the organization you are shipping the item(s) to.</blockquote>
+        <button type="button" class="prevBtn">Previous</button>
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+
+      <div class="step" id="step4">
+        <h2>Which airport or airfield is your item going to?</h2>
+        <p>
+          <label for="poe">Airfield/Airport Name:</label>
+          <select name="poe" id="poe">
+            <option value="">Select an Airport/Airfield</option>
+            <option value="AAL">Aalborg (AAL)</option>
+            <option value="AAR">Aarhus (AAR)</option>
+            <option value="ABD">Abadan (ABD)</option>
+            <option value="ABI">Abilene (ABI)</option>
+            <option value="ABQ">Albuquerque (ABQ)</option>
+            <option value="ABR">Aberdeen (ABR)</option>
+            <option value="ABV">Abuja (ABV)</option>
+            <option value="ABZ">Aberdeen (ABZ)</option>
+            <option value="ACA">Acapulco (ACA)</option>
+            <option value="ACC">Accra (ACC)</option>
+            <option value="ACE">Arrecife (ACE)</option>
+            <option value="ACH">St. Gallen-Altenrhein (ACH)</option>
+            <option value="ACK">Nantucket (ACK)</option>
+            <option value="ACO">Ascona (ACO)</option>
+            <option value="ACP">Sahand (ACP)</option>
+            <option value="ACR">Araracuara (ACR)</option>
+            <option value="ACS">Achinsk (ACS)</option>
+          </select>
+        </p>
+        <button type="button" class="prevBtn">Previous</button>
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+
+      <div class="step" id="step5">
+        <h2>Is your cargo considered an infectious substance?</h2>
+        <input type="radio">Yes</input><br>
+        <input type="radio">No</input><br>
+        <input type="radio">I Don't Know</input><br>
+        <button type="button" class="prevBtn">Previous</button>
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+
+      <div class="step" id="step6">
+        <h2>Is your cargo considered radioactive?</h2>
+        <input type="radio">Yes</input><br>
+        <input type="radio">No</input><br>
+        <input type="radio">I Don't Know</input><br>
+        <button type="button" class="prevBtn">Previous</button>
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+  </div>
+  </form>
+  </div>
+  <!-- A script tag to link to an external JavaScript file, which will contain the form's logic -->
+  <script src="script.js"></script>
+</body>
+
 </html>
