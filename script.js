@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Custom validation logic for specific steps
-        if (stepIndex === 1) { // Example for Step 2
+        if (stepIndex === 3) { // Example for Step 2
             // Get the value of the consigneeDODAAC input field
             const consigneeDODAAC = document.getElementById('consigneeDODAAC').value;
             // Check if the value matches the required format (6 uppercase letters or numbers)
