@@ -366,7 +366,7 @@
       </div>
       <div class="step" id="step2">
         <!-- Step 2: Prompt the user (shipper) for their phone numbers -->
-        <h2>Please Enter A Telephone Number(s)</h2>
+        <h2>What is a good telephone number for you?</h2>
         <p>
           <label for="shipperPhoneDSN">DSN:</label>
           <input type="tel" id="shipperPhoneDSN" name="shipperPhoneDSN" placeholder="(XXX) XXX-XXXX"><br>
@@ -389,9 +389,9 @@
         <button type="button" class="prevBtn">Previous</button>
         <button type="button" class="nextBtn">Next</button>
       </div>
-
+      <!-- Step 4: Prompt the user (shipper) to enter where they are shipping the cargo from -->
       <div class="step" id="step4">
-        <h2>Which airport or airfield is your item going to?</h2>
+        <h2>Which airport or airfield are you shipping your item(s) from?</h2>
         <p>
           <label for="poe">Airfield/Airport Name:</label>
           <select name="poe" id="poe">
@@ -418,8 +418,37 @@
         <button type="button" class="prevBtn">Previous</button>
         <button type="button" class="nextBtn">Next</button>
       </div>
-
+      <!-- Step 5: Prompt the user (shipper) to enter where the cargo is going -->
       <div class="step" id="step5">
+        <h2>Which airport or airfield is your item going to?</h2>
+        <p>
+          <label for="pod">Airfield/Airport Name:</label>
+          <select name="pod" id="pod">
+            <option value="">Select an Airport/Airfield</option>
+            <option value="AAL">Aalborg (AAL)</option>
+            <option value="AAR">Aarhus (AAR)</option>
+            <option value="ABD">Abadan (ABD)</option>
+            <option value="ABI">Abilene (ABI)</option>
+            <option value="ABQ">Albuquerque (ABQ)</option>
+            <option value="ABR">Aberdeen (ABR)</option>
+            <option value="ABV">Abuja (ABV)</option>
+            <option value="ABZ">Aberdeen (ABZ)</option>
+            <option value="ACA">Acapulco (ACA)</option>
+            <option value="ACC">Accra (ACC)</option>
+            <option value="ACE">Arrecife (ACE)</option>
+            <option value="ACH">St. Gallen-Altenrhein (ACH)</option>
+            <option value="ACK">Nantucket (ACK)</option>
+            <option value="ACO">Ascona (ACO)</option>
+            <option value="ACP">Sahand (ACP)</option>
+            <option value="ACR">Araracuara (ACR)</option>
+            <option value="ACS">Achinsk (ACS)</option>
+          </select>
+        </p>
+        <button type="button" class="prevBtn">Previous</button>
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+      <!-- Step 6: Ask the user if the cargo is infectious or not -->
+      <div class="step" id="step6">
         <h2>Is your cargo considered an infectious substance?</h2>
         <input type="radio">Yes</input><br>
         <input type="radio">No</input><br>
@@ -427,7 +456,7 @@
         <button type="button" class="prevBtn">Previous</button>
         <button type="button" class="nextBtn">Next</button>
       </div>
-
+      <!-- Step 6: Ask the user if the cargo is radioactive or not -->
       <div class="step" id="step6">
         <h2>Is your cargo considered radioactive?</h2>
         <input type="radio">Yes</input><br>
