@@ -1,57 +1,94 @@
+<!-- Define the document type and character encoding -->
 <!DOCTYPE html>
+<!-- Set the language of the document to English -->
 <html lang="en">
-<head>
+  <!-- The head section contains metadata about the document -->
+  <head>
+    <!-- Set the character encoding of the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- Set the viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set the title of the page, which appears in the browser's title bar -->
     <title>HazBuddy</title>
+    <!-- Link to an external stylesheet, which defines the visual styling of the page -->
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  </head>
+  <!-- The body section contains the content of the HTML document -->
+  <body>
+    <!-- A container element to wrap the entire form -->
     <div class="container">
-        <div class="progress-bar">
-            <div class="progress-bar-fill" id="progressBarFill"></div>
+      <!-- A progress bar to track the user's progress through the form -->
+      <div class="progress-bar">
+        <!-- The fill element of the progress bar, which will be updated dynamically -->
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+      <!-- The multi-step form, which is divided into several sections -->
+      <form id="multiStepForm">
+        <!-- Step 1: Shipper information -->
+        <div class="step">
+          <!-- A heading to identify the current step -->
+          <h2>Step 1: Shipper</h2>
+          <!-- A label and input field for the shipper's address -->
+          <label for="shipperAddress">Address:</label>
+          <input type="text" id="shipperAddress" name="shipperAddress" required minlength="10">
+          <!-- A label and input field for the shipper's phone number -->
+          <label for="shipperPhone">Telephone Number:</label>
+          <input type="tel" id="shipperPhone" name="shipperPhone" required pattern="^\d{10}$">
+          <!-- A button to proceed to the next step -->
+          <button type="button" class="nextBtn">Next</button>
         </div>
-        <form id="multiStepForm">
-            <div class="step">
-                <h2>Step 1: Shipper</h2>
-                <label for="shipperAddress">Address:</label>
-                <input type="text" id="shipperAddress" name="shipperAddress" required minlength="10">
-                <label for="shipperPhone">Telephone Number:</label>
-                <input type="tel" id="shipperPhone" name="shipperPhone" required pattern="^\d{10}$">
-                <button type="button" class="nextBtn">Next</button>
-            </div>
-            <div class="step">
-                <h2>Step 2: Consignee</h2>
-                <label for="consigneeDODAAC">DODAAC:</label>
-                <input type="text" id="consigneeDODAAC" name="consigneeDODAAC" required pattern="^[A-Z0-9]{6}$">
-                <label for="consigneeLocation">Geographical Location:</label>
-                <input type="text" id="consigneeLocation" name="consigneeLocation" required>
-                <label for="emergencyContact">Emergency Contact (for infectious substances):</label>
-                <input type="text" id="emergencyContact" name="emergencyContact">
-                <button type="button" class="prevBtn">Previous</button>
-                <button type="button" class="nextBtn">Next</button>
-            </div>
-            <!-- Repeat similar blocks for steps 3 to 7 -->
-            <div class="step" id="step8">
-                <h2>Step 8: Airport of Departure</h2>
-                <label for="poe">Enter the three-digit Port of Embarkation (POE):</label>
-                <input type="text" id="poe" name="poe" pattern="^[A-Z]{3}$" required>
-                <small>This is the IATA Aiport Code and must be exactly 3 letters.</small>
-                <label for="geoLocation">Enter the in-the-clear geographical location of the airport of departure (optional):</label>
-                <input type="text" id="geoLocation" name="geoLocation">
-                <button type="button" class="prevBtn">Previous</button>
-                <button type="button" class="nextBtn">Next</button>
-            </div>
-            <!-- Repeat similar blocks for steps 9 to 22 -->
-            <div class="step">
-                <h2>Step 22: Signature</h2>
-                <label for="signature">Signature:</label>
-                <input type="text" id="signature" name="signature" required>
-                <button type="button" class="prevBtn">Previous</button>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
+        <!-- Step 2: Consignee information -->
+        <div class="step">
+          <!-- A heading to identify the current step -->
+          <h2>Step 2: Consignee</h2>
+          <!-- A label and input field for the consignee's DODAAC -->
+          <label for="consigneeDODAAC">DODAAC:</label>
+          <input type="text" id="consigneeDODAAC" name="consigneeDODAAC" required pattern="^[A-Z0-9]{6}$">
+          <!-- A label and input field for the consignee's geographical location -->
+          <label for="consigneeLocation">Geographical Location:</label>
+          <input type="text" id="consigneeLocation" name="consigneeLocation" required>
+          <!-- A label and input field for the emergency contact (optional) -->
+          <label for="emergencyContact">Emergency Contact (for infectious substances):</label>
+          <input type="text" id="emergencyContact" name="emergencyContact">
+          <!-- Buttons to navigate between steps -->
+          <button type="button" class="prevBtn">Previous</button>
+          <button type="button" class="nextBtn">Next</button>
+        </div>
+        <!-- Repeat similar blocks for steps 3 to 7 -->
+        <!-- ... -->
+        <!-- Step 8: Airport of Departure -->
+        <div class="step" id="step8">
+          <!-- A heading to identify the current step -->
+          <h2>Step 8: Airport of Departure</h2>
+          <!-- A label and input field for the Port of Embarkation (POE) -->
+          <label for="poe">Enter the three-digit Port of Embarkation (POE):</label>
+          <input type="text" id="poe" name="poe" pattern="^[A-Z]{3}$" required>
+          <!-- A hint to explain the format of the POE code -->
+          <small>This is the IATA Aiport Code and must be exactly 3 letters.</small>
+          <!-- A label and input field for the geographical location of the airport (optional) -->
+          <label for="geoLocation">Enter the in-the-clear geographical location of the airport of departure (optional):</label>
+          <input type="text" id="geoLocation" name="geoLocation">
+          <!-- Buttons to navigate between steps -->
+          <button type="button" class="prevBtn">Previous</button>
+          <button type="button" class="nextBtn">Next</button>
+        </div>
+        <!-- Repeat similar blocks for steps 9 to 22 -->
+        <!-- ... -->
+        <!-- Step 22: Signature -->
+        <div class="step">
+          <!-- A heading to identify the current step -->
+          <h2>Step 22: Signature</h2>
+          <!-- A label and input field for the signature -->
+          <label for="signature">Signature:</label>
+          <input type="text" id="signature" name="signature" required>
+          <!-- A button to navigate to the previous step -->
+          <button type="button" class="prevBtn">Previous</button>
+          <!-- A button to submit the form -->
+          <button type="submit">Submit</button>
+        </div>
+      </form>
     </div>
+    <!-- A script tag to link to an external JavaScript file, which will contain the form's logic -->
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
