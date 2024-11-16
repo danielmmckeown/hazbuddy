@@ -2,11 +2,14 @@
 <html lang="en"> <!-- Set the language of the document to English -->
 
 <!-- The head section contains metadata about the document -->
+
 <head>
   <meta charset="UTF-8"> <!-- Set the character encoding of the document to UTF-8 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">   <!-- Set the viewport settings for responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Set the viewport settings for responsive design -->
   <title>HazBuddy</title> <!-- Set the title of the page, which appears in the browser's title bar -->
-  <link rel="stylesheet" href="styles.css"> <!-- Link to an external stylesheet, which defines the visual styling of the page -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Link to an external stylesheet, which defines the visual styling of the page -->
 </head>
 
 <body>
@@ -279,8 +282,8 @@
           </select>
         </p>
         <p>
-        <label for="shipperAddressCity">City:</label>
-        <input type="text" id="shipperAddressCity" name="shipperAddressCity">
+          <label for="shipperAddressCity">City:</label>
+          <input type="text" id="shipperAddressCity" name="shipperAddressCity">
         </p>
         <p>
           <label for="shipperAddressState">State:</label>
@@ -402,13 +405,6 @@
             <option value="ABZ">Aberdeen (ABZ)</option>
             <option value="ACA">Acapulco (ACA)</option>
             <option value="ACC">Accra (ACC)</option>
-            <option value="ACE">Arrecife (ACE)</option>
-            <option value="ACH">St. Gallen-Altenrhein (ACH)</option>
-            <option value="ACK">Nantucket (ACK)</option>
-            <option value="ACO">Ascona (ACO)</option>
-            <option value="ACP">Sahand (ACP)</option>
-            <option value="ACR">Araracuara (ACR)</option>
-            <option value="ACS">Achinsk (ACS)</option>
           </select>
         </p>
         <button type="button" class="prevBtn">Previous</button>
@@ -446,25 +442,38 @@
       <!-- Step 6: Ask the user if the cargo is infectious or not -->
       <div class="step" id="step6">
         <h2>Is your cargo considered an infectious substance?</h2>
-        <input type="radio">Yes</input><br>
+        <input type="radio">Yes<br>
         <input type="radio">No<br>
-        <input type="radio">I Don't Know</input><br>
+        <input type="radio">I Don't Know<br>
+        <!-- TODO If yes, prompt for additional information -->
         <button type="button" class="prevBtn">Previous</button>
         <button type="button" class="nextBtn">Next</button>
       </div>
       <!-- Step 7: Ask the user if the cargo is radioactive or not -->
       <div class="step" id="step7">
         <h2>Is your cargo considered radioactive?</h2>
-        <input type="radio">Yes</input><br>
-        <input type="radio">No</input><br>
-        <input type="radio">I Don't Know</input><br>
+        <input type="radio">Yes<br>
+        <input type="radio">No<br>
+        <input type="radio">I Don't Know<br>
+        <!-- TODO If no, delete Radioactive -->
+        <button type="button" class="prevBtn">Previous</button>
+        <button type="button" class="nextBtn">Next</button>
+      </div>
+      <!-- Step 8: Ask the user to enter the cargo's TCN -->
+      <div class="step" id="step8">
+        <h2>Please enter the Transportation Control Number (TCN):</h2>
+        <p>
+          <label for="tcn">TCN:</label>
+          <input type="text" id="tcn" name="tcn" required pattern="^[A-Z0-9]{17}$">
+        <blockquote>A TCN is made up of 17-characters.</blockquote>
         <button type="button" class="prevBtn">Previous</button>
         <button type="button" class="nextBtn">Next</button>
       </div>
   </div>
   </form>
   </div>
-  <script src="script.js"></script> <!-- A script tag to link to an external JavaScript file, which will contain the form's logic -->
+  <script src="script.js"></script>
+  <!-- A script tag to link to an external JavaScript file, which will contain the form's logic -->
 
 </body>
 
