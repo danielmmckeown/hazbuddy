@@ -6,14 +6,14 @@ Think of HazBuddy as Turbo Tax for HAZDECS!
 
 HazBuddy is a web application that walks Increment Monitors through completing a Shipper's Declaration of Dangerous Goods (SDDG). HazBuddy allows users to prepare and file a SDDG online, using a step-by-step interview process that guides them through the SDDG preparation and certification process.
 
-HazBuddy offers a range of features and tools to help users prepare their SDDG accurately and efficiently, including:
+HazBuddy offers a range of features and tools to help users prepare their SDDG accurately and efficiently, including:  
 
-**User Authentication:** Users must create an account and log in to access the software.
-**Data Collection:** Users input their hazardous material information, including TK.
-**Shipping Name Calculation:** The software calculates the HAZMAT's proper shipping name/description based on the data collected.
-**Form Generation:** The software generates the appropriate SDDG based on the previously collected data.
-**Error Checking:** The software checks for errors in the user's data and provides feedback to the user to correct any errors.
-**Filing**: The software allows users to electronically file their SDDG with their local Special Handling Office.
-**Audit Support:** The software provides support in the event of an audit by an inspector general inspection.
+**User Authentication:** Users must create an account and log in to access the software.  
+**Data Collection:** Users input their hazardous material information, including TK.  
+**Shipping Name Calculation:** The software calculates the HAZMAT's proper shipping name/description based on the data collected.  
+**Form Generation:** The software generates the appropriate SDDG based on the previously collected data.  
+**Error Checking:** The software checks for errors in the user's data and provides feedback to the user to correct any errors.  
+**Filing**: The software allows users to electronically file their SDDG with their local Special Handling Office.  
+**Audit Support:** The software provides support in the event of an audit by an inspector general inspection.  
 
 Check out Attachment 17 for specific instructions.
